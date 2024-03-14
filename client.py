@@ -1,5 +1,6 @@
 from openai import OpenAI
 import json
+from TXTDoc import TXTDoc
 
 
 # get config
@@ -10,6 +11,7 @@ sys_prompt = config['sys_prompt']
 few_shot_examples = config['few_shot_examples']
 base_url = config['base_url']
 api_key = config['api_key']
+test_file_path = config['test_file_path']
 
 
 # create client
@@ -26,8 +28,16 @@ for index, example in enumerate(few_shot_examples):
   message.append({"role": "assistant", "content": example['output']})
 
 
-# user inputs
-  message.append({"role": "user", "content": ""})
+
+txtDoc = TXTDoc()
+txtDoc.open_file(test_file_path)
+chunck = " "
+
+while chunck != "":
+
+  chunck = txtDoc.get_chunck(1024)
+
+  message.append({"role": "user", "content": chunck})
 
   completion = client.chat.completions.create(
     model = "Baichuan2-13B-Chat",
@@ -35,3 +45,5 @@ for index, example in enumerate(few_shot_examples):
   )
 
   print(completion.choices[0].message.content)
+
+  message.pop()

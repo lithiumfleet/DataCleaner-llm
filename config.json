@@ -16,7 +16,8 @@
 
     ],
     "base_url": "http://127.0.0.1:6800/v1",
-    "api_key": "sk-" 
+    "api_key": "sk-",
+    "test_file_path": "./7临床催眠心理学.txt"
 }
 
 
