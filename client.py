@@ -27,11 +27,11 @@ for index, example in enumerate(few_shot_examples):
 
 
 # user inputs
-message.append({"role": "user", "content": "what exactly do you need to call me?"})
+  message.append({"role": "user", "content": ""})
 
-completion = client.chat.completions.create(
-  model = "Baichuan2-13B-Chat",
-  messages = message
-)
+  completion = client.chat.completions.create(
+    model = "Baichuan2-13B-Chat",
+    messages = message
+  )
 
-print(completion.choices[0].message.content)
+  print(completion.choices[0].message.content)

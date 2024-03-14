@@ -19,5 +19,5 @@ nop
 
 ## todos
 
-+ [ ] find a proper prompt
++ [x] find a proper prompt
 + [ ] save the docs
