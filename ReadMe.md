@@ -20,4 +20,5 @@ nop
 ## todos
 
 + [x] find a proper prompt
++ [ ] text chunk generator
 + [ ] save the docs
