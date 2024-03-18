@@ -1,6 +1,9 @@
 .env/
 .vscode/
-*.log
+*.log*
 *.txt
 __pycache__/
 .swp
+cleaned_dataset/*
+*.json
+!config.json

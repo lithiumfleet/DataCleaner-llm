@@ -15,10 +15,13 @@ send files to llm, use it clean corpus!
 
 ### for sft datasets
 
-nop
+1. modified "self-distillation", ref: https://arxiv.org/abs/2402.13669
+2. save.
 
 ## todos
 
 + [x] find a proper prompt
-+ [ ] text chunk generator
-+ [ ] save the docs
++ [x] text chunk generator
++ [x] save the docs
++ [x] write a prompt similar to self-distillation
++ [ ] refactoring the code

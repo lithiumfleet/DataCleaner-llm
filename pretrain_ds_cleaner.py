@@ -9,18 +9,20 @@ from tqdm import tqdm
 with open('./config.json', 'r') as config_fp:
   config = json.load(config_fp)
 
-sys_prompt = config['sys_prompt']
-few_shot_examples = config['few_shot_examples']
+sys_prompt = config['rawtext_config']['sys_prompt']
+few_shot_examples = config['rawtext_config']['few_shot_examples']
+chunck_size = config['rawtext_config']['chunck_size']
+
 base_url = config['base_url']
 api_key = config['api_key']
-test_file_path = config['test_file_path']
+input_filepath = config['input_filepath']
 output_dir = config['output_dir']
-chunck_size = config['chunck_size']
 file_encoding = config['file_encoding']
 
 
 # create client
 client = OpenAI(base_url=base_url, api_key=api_key)
+
 
 # make message with history
 message = [
@@ -34,7 +36,7 @@ for index, example in enumerate(few_shot_examples):
 
 # start clean
 txtDoc = TXTDoc()
-txtDoc.open_file(test_file_path, file_encoding)
+txtDoc.open_file(input_filepath, file_encoding)
 
 with open(output_dir+os.sep+txtDoc.fp.name, 'w') as output_fp:
   with tqdm(total=len(txtDoc.fp.read())) as qbar:
@@ -46,7 +48,7 @@ with open(output_dir+os.sep+txtDoc.fp.name, 'w') as output_fp:
         txtDoc.close_file()
         break
 
-      message.append({"role": "user", "content": chunck})
+      message.append({"role": "user", "content":'{{'+ chunck +'}}'})
 
       completion = client.chat.completions.create(
         model = "Baichuan2-13B-Chat",
