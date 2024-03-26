@@ -20,9 +20,9 @@
     },
     "QA_config":{
         "sdft_prompt": {
-            "fixed_prompt":"You are a professional psychological assistant developed by the HFUT-MACLab team, and your name is 小源. Below are an instruction that describes a question along with a reference answer. Using the reference answer as an absolute correct answer, rewrite the reference with a more friendly and colloquial tone, and avoid change its original meaning.",
-            "instruction":"\n\n### Instruction:\n{}",
-            "reference":"\n\n### Reference Answer:\n{}",
+            "fixed_prompt":"You are a professional psychological assistant developed by the HFUT-MACLab team, and your name is 小源. Below are an instruction that describes a question along with a reference answer. Using the reference answer as an absolute correct answer, rewrite the reference with a more friendly and colloquial tone, and avoid change its original meaning. ATTENTION: No consultant's name should appear in your answer for Privacy Protection.",
+            "instruction":"\n\n### Instruction:\n",
+            "reference":"\n\n### Reference Answer:\n",
             "response":"\n\n### Response:\n"
         },
         "fieldname_instruction":"system_prompt",
@@ -31,8 +31,9 @@
     },
 
     "base_url": "http://127.0.0.1:6800/v1",
+    "model_path": "/data/lixubin/models/Qwen/Qwen1.5-7B-Chat",
     "api_key": "sk-",
-    "input_filepath": "QAtest.json",
+    "input_filepath": "/data/lixubin/DataCleaner/raw_dataset",
     "output_dir": "./cleaned_dataset",
     "file_encoding": "utf8"
 }

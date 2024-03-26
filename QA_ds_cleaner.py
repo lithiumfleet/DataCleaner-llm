@@ -46,18 +46,23 @@ for index, sample in enumerate(txtDoc.get_Samples()):
   message = [
     { "role": "user", "content": 
       fixed_prompt +
-      instruction.format(sample.instruction+sample.input) +
-      reference.format(sample.refernce) +
+      instruction+sample.instruction+sample.input +
+      reference+sample.refernce +
       response
     }
   ]
 
   # get response
-  completion = client.chat.completions.create(
-    model = "Baichuan2-13B-Chat",
-    messages = message,
-    temperature = 0.8
-  )
+  try:
+    completion = client.chat.completions.create(
+      model = "Qwen1.5-1.8B-Chat",
+      messages = message,
+      temperature = 0.8
+    )
+  except:
+    print("[WARN] Except occur in index: {}".format(index))  
+    continue
+    
 
   new_sample = {
     fieldname_instruction: sample.instruction,
@@ -67,7 +72,9 @@ for index, sample in enumerate(txtDoc.get_Samples()):
   new_dataset.append(new_sample)
 
   # process circle
-  print(["[  ]","[>  ]","[=> ]","[==>]","[ ==]","[  =]"][index%6] + " Current index: {}".format(index), end="\r")
+  print(["[   ]","[>  ]","[=> ]","[==>]","[ ==]","[  =]"][index%6] + " Current index: {}".format(index), end="\r")
+  if index%20 == 0:
+    print(new_sample)
 
 # save to file: 
 output_file_path = output_dir+os.sep+txtDoc.fp.name
